@@ -1,25 +1,23 @@
-import java.awt.*; //import awt
-import java.awt.event.ActionListener; //import action listener
-import java.awt.event.ActionEvent; //import action event
-import javax.swing.*; //import Swing
+import javax.swing.*;
+import java.awt.*;
 
 
 public class BankGUI extends JFrame{
     //create instance variables
-    private JFrame mainMenu = new JFrame();
-    private JPanel menuPanel = new JPanel(); // panel that links both button and display panels
-    private JPanel buttonPanel = new JPanel(); // panel for the buttons
-    private JPanel displayPanel = new JPanel(); //panel to display information
+    private final JFrame mainMenu = new JFrame();
+    private final JPanel menuPanel = new JPanel(); // panel that links both button and display panels
+    private final JPanel buttonPanel = new JPanel(); // panel for the buttons
+    private final JPanel displayPanel = new JPanel(); //panel to display information
     private String firstName; //for use in user input 
     private String lastName; //for use in user input 
     private int accountID; //for use in user input 
     private JLabel displayBalance, firstNameLabel, lastNameLabel, accountIDLabel; //labels
     private double balance = 1000; //starting balance will be set to 100
-    private JButton btn1 = new JButton("Deposit"); //deposit button
-    private JButton btn2 = new JButton("Withdraw"); //withdraw button
-    private JButton btn3 = new JButton("Display Account Information"); //account info button
-    private JButton btn4 = new JButton("Account Setup"); //setup account
-    private JButton btn5 = new JButton("Exit"); //exit button
+    private final JButton btn1 = new JButton("Deposit"); //deposit button
+    private final JButton btn2 = new JButton("Withdraw"); //withdraw button
+    private final JButton btn3 = new JButton("Display Account Information"); //account info button
+    private final JButton btn4 = new JButton("Account Setup"); //setup account
+    private final JButton btn5 = new JButton("Exit"); //exit button
     
 
     
@@ -66,7 +64,7 @@ public class BankGUI extends JFrame{
         menuPanel.setLayout(new GridLayout(2,1)); 
         displayPanel.setBackground(Color.LIGHT_GRAY); //this will set the top panel to a light gray color to show separation
 
-        displayPanel.setLayout(new GridLayout(1,4)); //set the layout so that it has one row and 4 columns
+        displayPanel.setLayout(new GridLayout(4,1)); //set the layout so that it has 4 row and 1 columns (vertical diplay)
         buttonPanel.setLayout(new GridLayout(5, 1)); //set th e layout so that is has 5 rows and 1 column
         
 
@@ -79,82 +77,72 @@ public class BankGUI extends JFrame{
     public void setupButtons(){
         //btn1 deposit setup
         btn1.setSize(100, 20); //set the size of button: width, height
-        btn1.addActionListener(new ActionListener(){ //create anonymous ActionListener inner class for this button
-            @Override //following method must be overriden
-            public void actionPerformed(ActionEvent e){ //boiler plate. required to have this method for AL's
-                double userNum = Double.parseDouble(JOptionPane.showInputDialog(displayPanel, "Type in how much you would like to deposit"));
-                balance += userNum; // this means balance = balance + userNum
-                displayBalance.setText("Balance " + balance); //set the display text of displayBalance label to this
-            }
-
+        //create anonymous ActionListener inner class for this button
+//following method must be overriden
+        btn1.addActionListener(e -> { //boiler plate. required to have this method for AL's
+            double userNum = Double.parseDouble(JOptionPane.showInputDialog(displayPanel, "Type in how much you would like to deposit"));
+            balance += userNum; // this means balance = balance + userNum
+            displayBalance.setText("Balance " + balance); //set the display text of displayBalance label to this
         });
         buttonPanel.add(btn1);// add this button to the main menu panel
 
         //btn2 withdraw setup
         btn2.setBounds(20, 400, 100, 20); //set the size of button: width, height
-        btn2.addActionListener(new ActionListener(){ //create anonymous ActionListener inner class for this button
-            @Override //following method must be overriden
-            public void actionPerformed(ActionEvent e){ //boiler plate. required to have this method for AL's
-                double userNum = Double.parseDouble(JOptionPane.showInputDialog(displayPanel, "Type in how much you would like to withdraw"));
-                balance -= userNum; //this means balance = balance - userNum
-                displayBalance.setText("Balance " + balance); //set the display text of displayBalance label to this
-            }
-
+        //create anonymous ActionListener inner class for this button
+//following method must be overriden
+        btn2.addActionListener(e -> { //boiler plate. required to have this method for AL's
+            double userNum = Double.parseDouble(JOptionPane.showInputDialog(displayPanel, "Type in how much you would like to withdraw"));
+            balance -= userNum; //this means balance = balance - userNum
+            displayBalance.setText("Balance " + balance); //set the display text of displayBalance label to this
         });
         buttonPanel.add(btn2);// add this button to the main menu panel
 
         //btn3 display account infosetup
         btn3.setBounds(20, 400, 100, 20); //set the size of button: width, height
-        btn3.addActionListener(new ActionListener(){ //create anonymous ActionListener inner class for this button
-            @Override //following method must be overriden
-            public void actionPerformed(ActionEvent e){ //boiler plate. required to have this method for AL's
-                
-                if(!firstNameLabel.isVisible()){ //if firstNameLabel is not visible
-                    firstNameLabel.setVisible(true); //set it to visible
-                }
+        //create anonymous ActionListener inner class for this button
+//following method must be overriden
+        btn3.addActionListener(e -> { //boiler plate. required to have this method for AL's
 
-                if(!lastNameLabel.isVisible()){ //if lastNameLabel is not visible
-                    lastNameLabel.setVisible(true); //set to visible
-                }
-
-                if(!accountIDLabel.isVisible()){ //if accountIDLabel is not visible
-                    accountIDLabel.setVisible(true); //set to visible
-                }
-
-                if(!displayBalance.isVisible()){ //if displayBalance is not visible
-                    displayBalance.setVisible(true); //set to visible
-                }
+            if(!firstNameLabel.isVisible()){ //if firstNameLabel is not visible
+                firstNameLabel.setVisible(true); //set it to visible
             }
 
+            if(!lastNameLabel.isVisible()){ //if lastNameLabel is not visible
+                lastNameLabel.setVisible(true); //set to visible
+            }
+
+            if(!accountIDLabel.isVisible()){ //if accountIDLabel is not visible
+                accountIDLabel.setVisible(true); //set to visible
+            }
+
+            if(!displayBalance.isVisible()){ //if displayBalance is not visible
+                displayBalance.setVisible(true); //set to visible
+            }
         });
         buttonPanel.add(btn3);// add this button to the main menu panel
 
         //btn4 account setup button 
         btn4.setBounds(20, 400, 100, 20); //set the size of button: width, height
-        btn4.addActionListener(new ActionListener(){ //create anonymous ActionListener inner class for this button
-            @Override //following method must be overriden
-            public void actionPerformed(ActionEvent e){ //boiler plate. required to have this method for AL's
-                firstName = (String)JOptionPane.showInputDialog(displayPanel, "Type in your first name");
-                lastName = (String)JOptionPane.showInputDialog(displayPanel, "Type in your last name");
-                accountID = Integer.parseInt(JOptionPane.showInputDialog(displayPanel, "Type in your account ID"));
+        //create anonymous ActionListener inner class for this button
+//following method must be overriden
+        btn4.addActionListener(e -> { //boiler plate. required to have this method for AL's
+            firstName = JOptionPane.showInputDialog(displayPanel, "Type in your first name");
+            lastName = JOptionPane.showInputDialog(displayPanel, "Type in your last name");
+            accountID = Integer.parseInt(JOptionPane.showInputDialog(displayPanel, "Type in your account ID"));
 
-                //update the labels with the new values
-                firstNameLabel.setText("First Name: "+ firstName);
-                lastNameLabel.setText("Last Name: "+ lastName);
-                accountIDLabel.setText("Account ID Name: "+ accountID);
-            }
-
+            //update the labels with the new values
+            firstNameLabel.setText("First Name: "+ firstName);
+            lastNameLabel.setText("Last Name: "+ lastName);
+            accountIDLabel.setText("Account ID Name: "+ accountID);
         });
         buttonPanel.add(btn4);// add this button to the main menu panel
 
         //btn 5 exit button
         btn5.setBounds(20, 400, 100, 20); //set the size of button: width, height
-        btn5.addActionListener(new ActionListener(){ //create anonymous ActionListener inner class for this button
-            @Override //following method must be overriden
-            public void actionPerformed(ActionEvent e){ //boiler plate. required to have this method for AL's
-                 System.exit(0);
-            }
-
+        //create anonymous ActionListener inner class for this button
+//following method must be overriden
+        btn5.addActionListener(e -> { //boiler plate. required to have this method for AL's
+             System.exit(0);
         });
         buttonPanel.add(btn5);
     }
